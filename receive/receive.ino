@@ -10,6 +10,7 @@ void setup()
 {
   while (!Serial);
   Serial.begin(9600);
+  pinMode(9, OUTPUT);
   
   radio.begin();
   radio.openReadingPipe(0, rxAddr);
@@ -21,9 +22,9 @@ void loop()
 {
   if (radio.available())
   {
-    char text[32] = {0};
-    radio.read(&text, sizeof(text));
-    
-    Serial.println(text);
+    bool sample;
+    radio.read(&sample, sizeof(sample));
+    digitalWrite(9, sample);
+   // Serial.println(text);
   }
 }
