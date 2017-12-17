@@ -5,7 +5,7 @@
 
 RF24 radio(7, 8);
 
-const char channel = 1;
+const byte channel = 2;
 const byte rxAddr[6] = "00001";
 bool sample = LOW;
 
