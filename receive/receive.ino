@@ -3,18 +3,15 @@
 #include <RF24.h>
 
 RF24 radio(7, 8);
-
 const byte rxAddr[6] = "00001";
 
 void setup()
 {
   while (!Serial);
   Serial.begin(9600);
-  pinMode(9, OUTPUT);
-  
+  radio.setChannel(1);
   radio.begin();
   radio.openReadingPipe(0, rxAddr);
-  
   radio.startListening();
 }
 
@@ -22,9 +19,9 @@ void loop()
 {
   if (radio.available())
   {
-    bool sample;
-    radio.read(&sample, sizeof(sample));
-    digitalWrite(9, sample);
-   // Serial.println(text);
+    char text[32] = {0};
+    radio.read(&text, sizeof(text));
+    Serial.println(text);
   }
 }
+
