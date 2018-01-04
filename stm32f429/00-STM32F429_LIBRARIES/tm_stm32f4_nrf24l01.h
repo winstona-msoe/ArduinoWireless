@@ -135,8 +135,8 @@ IRQ			Not used	Interrupt pin. Goes low when active. Pin functionality is active,
 
 /* SPI chip enable pin */
 #ifndef NRF24L01_CSN_PIN
-#define NRF24L01_CSN_PORT			GPIOD
-#define NRF24L01_CSN_PIN			GPIO_PIN_7
+#define NRF24L01_CSN_PORT			GPIOA	//GPIOD
+#define NRF24L01_CSN_PIN			GPIO_PIN_12	//GPIO_PIN_7
 #endif
 
 /* Chip enable for transmitting */
