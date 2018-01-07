@@ -5,7 +5,7 @@
 
 RF24 radio(7, 8);
 
-const byte channel = 2;
+const byte channel = 0;
 const byte rxAddr[6] = "00001";
 bool sample = LOW;
 
@@ -23,5 +23,5 @@ void loop()
 {
   sample = !sample;
   radio.write(&sample, sizeof(sample));
-  delay(1);
+  delay(2);
 }

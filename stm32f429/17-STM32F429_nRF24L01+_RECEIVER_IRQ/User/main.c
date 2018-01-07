@@ -60,7 +60,7 @@ int main(void) {
 	TM_DISCO_LedInit();
 	
 	/* Initialize USART, TX: PB6, RX: PB7 */
-	TM_USART_Init(USART1, TM_USART_PinsPack_2, 115200);
+	TM_USART_Init(USART2, TM_USART_PinsPack_1, 115200);
 	
 	/* Initialize NRF24L01+ on channel 15 and 32bytes of payload */
 	/* By default 2Mbps data rate and 0dBm output power */

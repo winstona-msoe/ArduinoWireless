@@ -84,8 +84,8 @@ IRQ			Not used	Interrupt pin. Goes low when active. Pin functionality is active,
 #define NRF24L01_CSN_PIN			GPIO_Pin_7
 
 //Change CE pin. This pin is used to enable/disable transmitter/receiver functionality
-#define NRF24L01_CE_PORT			GPIOD
-#define NRF24L01_CE_PIN				GPIO_Pin_8
+#define NRF24L01_CE_PORT			GPIOA
+#define NRF24L01_CE_PIN				GPIO_Pin_12
 @endverbatim
  *
  * \par Changelog
@@ -141,8 +141,8 @@ IRQ			Not used	Interrupt pin. Goes low when active. Pin functionality is active,
 
 /* Chip enable for transmitting */
 #ifndef NRF24L01_CE_PIN
-#define NRF24L01_CE_PORT			GPIOD
-#define NRF24L01_CE_PIN				GPIO_PIN_8
+#define NRF24L01_CE_PORT			GPIOA
+#define NRF24L01_CE_PIN				GPIO_PIN_11
 #endif
 
 /* Pins configuration */
