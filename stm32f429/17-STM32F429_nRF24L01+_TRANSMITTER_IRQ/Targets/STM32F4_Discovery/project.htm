@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Targets\STM32F4_Discovery\project.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Targets\STM32F4_Discovery\project.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Fri Jan 05 14:53:17 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sun Jan 07 17:30:17 2018
 <BR><P>
 <H3>Maximum Stack Usage =        180 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -843,7 +843,7 @@ Global Symbols
 
 <P><STRONG><a name="[186]"></a>TM_DISCO_ButtonOnReleased</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, tm_stm32f4_disco.o(.text), UNUSED)
 
-<P><STRONG><a name="[90]"></a>TM_NRF24L01_InitPins</STRONG> (Thumb, 60 bytes, Stack size 16 bytes, tm_stm32f4_nrf24l01.o(.text))
+<P><STRONG><a name="[90]"></a>TM_NRF24L01_InitPins</STRONG> (Thumb, 56 bytes, Stack size 16 bytes, tm_stm32f4_nrf24l01.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = TM_NRF24L01_InitPins &rArr; TM_GPIO_Init &rArr; TM_GPIO_INT_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TM_GPIO_Init
@@ -867,7 +867,7 @@ Global Symbols
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TM_NRF24L01_PowerUpRx
 </UL>
 
-<P><STRONG><a name="[93]"></a>TM_NRF24L01_PowerUpRx</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, tm_stm32f4_nrf24l01.o(.text))
+<P><STRONG><a name="[93]"></a>TM_NRF24L01_PowerUpRx</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, tm_stm32f4_nrf24l01.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = TM_NRF24L01_PowerUpRx &rArr; TM_NRF24L01_WriteRegister
 </UL>
 <BR>[Calls]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TM_NRF24L01_WriteRegister
@@ -929,7 +929,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[9b]"></a>TM_NRF24L01_SetMyAddress</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, tm_stm32f4_nrf24l01.o(.text))
+<P><STRONG><a name="[9b]"></a>TM_NRF24L01_SetMyAddress</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, tm_stm32f4_nrf24l01.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TM_NRF24L01_SetMyAddress &rArr; TM_NRF24L01_WriteRegisterMulti &rArr; TM_SPI_WriteMulti
 </UL>
 <BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TM_NRF24L01_WriteRegisterMulti
@@ -961,7 +961,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TM_NRF24L01_PowerDown
 </UL>
 
-<P><STRONG><a name="[9f]"></a>TM_NRF24L01_ReadBit</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, tm_stm32f4_nrf24l01.o(.text), UNUSED)
+<P><STRONG><a name="[9f]"></a>TM_NRF24L01_ReadBit</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, tm_stm32f4_nrf24l01.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TM_NRF24L01_ReadRegister
 </UL>
 
@@ -982,7 +982,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TM_NRF24L01_WriteBit
 </UL>
 
-<P><STRONG><a name="[a4]"></a>TM_NRF24L01_Transmit</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, tm_stm32f4_nrf24l01.o(.text))
+<P><STRONG><a name="[a4]"></a>TM_NRF24L01_Transmit</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, tm_stm32f4_nrf24l01.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = TM_NRF24L01_Transmit &rArr; TM_NRF24L01_PowerUpTx &rArr; TM_NRF24L01_WriteRegister
 </UL>
 <BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TM_SPI_WriteMulti
