@@ -17,7 +17,6 @@
 /* Include my libraries here */
 #include "defines.h"
 #include "tm_stm32f4_nrf24l01.h"
-#include "tm_stm32f4_disco.h"
 #include "tm_stm32f4_delay.h"
 #include "tm_stm32f4_usart.h"
 #include <stdio.h>
@@ -52,7 +51,7 @@ int main(void) {
 	TM_DELAY_Init();
 	
 	/* Initialize onboard leds */
-	TM_DISCO_LedInit();
+	//TM_DISCO_LedInit();
 	
 	/* Initialize USART, TX: PB6, RX: PB7 */
 	TM_USART_Init(USART1, TM_USART_PinsPack_2, 115200);
@@ -91,7 +90,7 @@ int main(void) {
 			TM_NRF24L01_Transmit(dataOut);
 			
 			/* Turn on led to indicate sending */
-			TM_DISCO_LedOn(LED_GREEN);
+			//TM_DISCO_LedOn(LED_GREEN);
 			
 			/* Wait for data to be sent */
 			do {
@@ -100,7 +99,7 @@ int main(void) {
 			} while (transmissionStatus == TM_NRF24L01_Transmit_Status_Sending);
 			
 			/* Turn off led */
-			TM_DISCO_LedOff(LED_GREEN);
+			//TM_DISCO_LedOff(LED_GREEN);
 			
 			/* Go back to RX mode */
 			TM_NRF24L01_PowerUpRx();

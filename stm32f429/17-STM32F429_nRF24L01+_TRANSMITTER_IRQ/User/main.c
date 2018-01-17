@@ -17,7 +17,6 @@
 /* Include my libraries here */
 #include "defines.h"
 #include "tm_stm32f4_nrf24l01.h"
-#include "tm_stm32f4_disco.h"
 #include "tm_stm32f4_delay.h"
 #include "tm_stm32f4_usart.h"
 #include "tm_stm32f4_exti.h"
@@ -59,7 +58,7 @@ int main(void) {
 	TM_DELAY_Init();
 	
 	/* Initialize onboard leds */
-	TM_DISCO_LedInit();
+	//TM_DISCO_LedInit();
 	
 	/* Initialize USART, TX: PB6, RX: PB7 */
 	TM_USART_Init(USART2, TM_USART_PinsPack_1, 115200);
@@ -100,7 +99,7 @@ int main(void) {
 			TM_NRF24L01_Transmit(dataOut);
 			
 			/* Turn on led to indicate sending */
-			TM_DISCO_LedOn(LED_GREEN);
+			//TM_DISCO_LedOn(LED_GREEN);
 			
 			/* Set NRF state to sending */
 			transmissionStatus = TM_NRF24L01_Transmit_Status_Sending;
@@ -149,7 +148,7 @@ void TM_EXTI_Handler(uint16_t GPIO_Pin) {
 			transmissionStatus = TM_NRF24L01_Transmit_Status_Ok;
 			
 			/* Turn off led */
-			TM_DISCO_LedOff(LED_GREEN);
+			//TM_DISCO_LedOff(LED_GREEN);
 			
 			/* Go back to RX mode */
 			TM_NRF24L01_PowerUpRx();
@@ -161,7 +160,7 @@ void TM_EXTI_Handler(uint16_t GPIO_Pin) {
 			transmissionStatus = TM_NRF24L01_Transmit_Status_Lost;
 			
 			/* Turn off led */
-			TM_DISCO_LedOff(LED_GREEN);
+			//TM_DISCO_LedOff(LED_GREEN);
 			
 			/* Go back to RX mode */
 			TM_NRF24L01_PowerUpRx();
