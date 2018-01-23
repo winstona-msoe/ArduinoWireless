@@ -21,6 +21,26 @@
 #include "tm_stm32f4_usart.h"
 #include <stdio.h>
 
+#include "tm_stm32f4_nrf24l01.h"
+
+/* SPI chip enable pin */
+#ifndef NRF24L01_CSN_PIN
+#define NRF24L01_CSN_PORT			GPIOA	//GPIOD
+#define NRF24L01_CSN_PIN			GPIO_PIN_12	//GPIO_PIN_7
+#endif
+
+/* Chip enable for transmitting */
+#ifndef NRF24L01_CE_PIN
+#define NRF24L01_CE_PORT			GPIOA //GPIOD
+#define NRF24L01_CE_PIN				GPIO_PIN_11 //GPIO_PIN_8
+#endif
+
+/* Pins configuration */
+#define NRF24L01_CE_LOW				TM_GPIO_SetPinLow(NRF24L01_CE_PORT, NRF24L01_CE_PIN)
+#define NRF24L01_CE_HIGH			TM_GPIO_SetPinHigh(NRF24L01_CE_PORT, NRF24L01_CE_PIN)
+#define NRF24L01_CSN_LOW			TM_GPIO_SetPinLow(NRF24L01_CSN_PORT, NRF24L01_CSN_PIN)
+#define NRF24L01_CSN_HIGH			TM_GPIO_SetPinHigh(NRF24L01_CSN_PORT, NRF24L01_CSN_PIN)
+
 /* My address */
 uint8_t MyAddress[] = {
 	0xE7,
@@ -54,7 +74,7 @@ int main(void) {
 	//TM_DISCO_LedInit();
 	
 	/* Initialize USART, TX: PB6, RX: PB7 */
-	TM_USART_Init(USART1, TM_USART_PinsPack_2, 115200);
+	TM_USART_Init(USART2, TM_USART_PinsPack_1, 115200);
 	
 	/* Initialize NRF24L01+ on channel 15 and 32bytes of payload */
 	/* By default 2Mbps data rate and 0dBm output power */
@@ -70,6 +90,24 @@ int main(void) {
 	/* Set TX address, 5 bytes */
 	TM_NRF24L01_SetTxAddress(TxAddress);
 	
+//	while (1) {
+//		/* Chip enable put to low, disable it */
+//		NRF24L01_CE_LOW;
+//		
+//		/* Go to power up tx mode */
+//		//TM_NRF24L01_PowerUpTx();
+//		
+//		/* Send payload to nRF24L01+ */
+//		NRF24L01_CSN_LOW;
+//		/* Send write payload command */
+//		TM_SPI_Send(NRF24L01_SPI, 0x55);
+//		/* Disable SPI */
+//		NRF24L01_CSN_HIGH;
+//		
+//		/* Send data! */
+//		NRF24L01_CE_HIGH;
+//	}
+	
 	/* Reset counter */
 	TM_DELAY_SetTime(2001);
 	
@@ -81,7 +119,7 @@ int main(void) {
 			sprintf((char *)dataOut, "abcdefghijklmnoszxABCDEFCBDA");
 			
 			/* Display on USART */
-			TM_USART_Puts(USART1, "pinging: ");
+			TM_USART_Puts(USART2, "pinging: ");
 			
 			/* Reset time, start counting microseconds */
 			TM_DELAY_SetTime(0);
@@ -111,7 +149,7 @@ int main(void) {
 			sprintf(str, "%d ms", TM_DELAY_Time());
 			
 			/* Show ping time */
-			TM_USART_Puts(USART1, str);
+			TM_USART_Puts(USART2, str);
 			
 			/* Get data from NRF2L01+ */
 			TM_NRF24L01_GetData(dataIn);
@@ -119,13 +157,13 @@ int main(void) {
 			/* Check transmit status */
 			if (transmissionStatus == TM_NRF24L01_Transmit_Status_Ok) {
 				/* Transmit went OK */
-				TM_USART_Puts(USART1, ": OK\n");
+				TM_USART_Puts(USART2, ": OK\n");
 			} else if (transmissionStatus == TM_NRF24L01_Transmit_Status_Lost) {
 				/* Message was LOST */
-				TM_USART_Puts(USART1, ": LOST\n");
+				TM_USART_Puts(USART2, ": LOST\n");
 			} else {
 				/* This should never happen */
-				TM_USART_Puts(USART1, ": SENDING\n");
+				TM_USART_Puts(USART2, ": SENDING\n");
 			}
 		}
 	}
