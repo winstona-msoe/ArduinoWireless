@@ -17,6 +17,7 @@
  * |----------------------------------------------------------------------
  */
 #include "tm_stm32f4_nrf24l01.h"
+#include "tm_stm32f4_delay.h"
 
 /* NRF24L01+ registers*/
 #define NRF24L01_REG_CONFIG			0x00	//Configuration Register
@@ -163,7 +164,8 @@
 #define NRF24L01_250KBPS		2
 
 /* Configuration */
-#define NRF24L01_CONFIG			((1 << NRF24L01_EN_CRC) | (0 << NRF24L01_CRCO))
+// #define NRF24L01_CONFIG			((1 << NRF24L01_EN_CRC) | (0 << NRF24L01_CRCO))
+#define NRF24L01_CONFIG			((0 << NRF24L01_EN_CRC) | (0 << NRF24L01_CRCO))
 
 /* Instruction Mnemonics */
 #define NRF24L01_REGISTER_MASK				0x1F
@@ -221,6 +223,8 @@ void TM_NRF24L01_InitPins(void) {
 	
 	/* CE low = disable TX/RX */
 	NRF24L01_CE_LOW;
+	
+	Delayms(100);
 }
 
 uint8_t TM_NRF24L01_Init(uint8_t channel, uint8_t payload_size) {
@@ -229,6 +233,8 @@ uint8_t TM_NRF24L01_Init(uint8_t channel, uint8_t payload_size) {
 	
 	/* Initialize SPI */
 	TM_SPI_Init(NRF24L01_SPI, NRF24L01_SPI_PINS);
+	
+	Delayms(105);
 	
 	/* Max payload is 32bytes */
 	if (payload_size > 32) {
@@ -262,7 +268,7 @@ uint8_t TM_NRF24L01_Init(uint8_t channel, uint8_t payload_size) {
 	TM_NRF24L01_WriteRegister(NRF24L01_REG_CONFIG, NRF24L01_CONFIG);
 	
 	/* Enable auto-acknowledgment for all pipes */
-	TM_NRF24L01_WriteRegister(NRF24L01_REG_EN_AA, 0x3F);
+	// TM_NRF24L01_WriteRegister(NRF24L01_REG_EN_AA, 0x3F);
 	
 	/* Enable RX addresses */
 	TM_NRF24L01_WriteRegister(NRF24L01_REG_EN_RXADDR, 0x3F);
@@ -355,6 +361,7 @@ void TM_NRF24L01_WriteRegisterMulti(uint8_t reg, uint8_t *data, uint8_t count) {
 void TM_NRF24L01_PowerUpTx(void) {
 	NRF24L01_CLEAR_INTERRUPTS;
 	TM_NRF24L01_WriteRegister(NRF24L01_REG_CONFIG, NRF24L01_CONFIG | (0 << NRF24L01_PRIM_RX) | (1 << NRF24L01_PWR_UP));
+	Delayms(5); // Arduino delay
 }
 
 void TM_NRF24L01_PowerUpRx(void) {
@@ -368,6 +375,7 @@ void TM_NRF24L01_PowerUpRx(void) {
 	TM_NRF24L01_WriteRegister(NRF24L01_REG_CONFIG, NRF24L01_CONFIG | 1 << NRF24L01_PWR_UP | 1 << NRF24L01_PRIM_RX);
 	/* Start listening */
 	NRF24L01_CE_HIGH;
+	Delayms(5); // Arduino delay
 }
 
 void TM_NRF24L01_PowerDown(void) {

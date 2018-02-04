@@ -38,8 +38,6 @@
 /* Pins configuration */
 #define NRF24L01_CE_LOW				TM_GPIO_SetPinLow(NRF24L01_CE_PORT, NRF24L01_CE_PIN)
 #define NRF24L01_CE_HIGH			TM_GPIO_SetPinHigh(NRF24L01_CE_PORT, NRF24L01_CE_PIN)
-#define NRF24L01_CSN_LOW			TM_GPIO_SetPinLow(NRF24L01_CSN_PORT, NRF24L01_CSN_PIN)
-#define NRF24L01_CSN_HIGH			TM_GPIO_SetPinHigh(NRF24L01_CSN_PORT, NRF24L01_CSN_PIN)
 
 /* My address */
 uint8_t MyAddress[] = {
@@ -81,8 +79,8 @@ int main(void) {
 	/* NRF24L01 goes to RX mode by default */
 	TM_NRF24L01_Init(15, 32);
 	
-	/* Set 2MBps data rate and -18dBm output power */
-	TM_NRF24L01_SetRF(TM_NRF24L01_DataRate_2M, TM_NRF24L01_OutputPower_M18dBm);
+	/* Set 1MBps data rate and -18dBm output power */
+	TM_NRF24L01_SetRF(TM_NRF24L01_DataRate_1M, TM_NRF24L01_OutputPower_M18dBm);
 	
 	/* Set my address, 5 bytes */
 	TM_NRF24L01_SetMyAddress(MyAddress);
@@ -130,10 +128,12 @@ int main(void) {
 			/* Turn on led to indicate sending */
 			//TM_DISCO_LedOn(LED_GREEN);
 			
+			uint8_t reg;
 			/* Wait for data to be sent */
 			do {
 				/* Get transmission status */
 				transmissionStatus = TM_NRF24L01_GetTransmissionStatus();
+				reg = TM_NRF24L01_ReadRegister(0x00);
 			} while (transmissionStatus == TM_NRF24L01_Transmit_Status_Sending);
 			
 			/* Turn off led */
