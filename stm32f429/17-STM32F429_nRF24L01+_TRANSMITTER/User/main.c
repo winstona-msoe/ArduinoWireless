@@ -79,8 +79,8 @@ int main(void) {
 	/* NRF24L01 goes to RX mode by default */
 	TM_NRF24L01_Init(15, 32);
 	
-	/* Set 1MBps data rate and -18dBm output power */
-	TM_NRF24L01_SetRF(TM_NRF24L01_DataRate_1M, TM_NRF24L01_OutputPower_M18dBm);
+	/* Set 2MBps data rate and -18dBm output power */
+	TM_NRF24L01_SetRF(TM_NRF24L01_DataRate_2M, TM_NRF24L01_OutputPower_M18dBm);
 	
 	/* Set my address, 5 bytes */
 	TM_NRF24L01_SetMyAddress(MyAddress);
