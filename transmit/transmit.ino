@@ -14,7 +14,9 @@ void setup()
   radio.begin();
   radio.setChannel(channel);
   radio.setRetries(15, 15);
+  radio.setDataRate(RF24_1MBPS);
   radio.openWritingPipe(rxAddr);
+  Serial.begin(9600);
   
   radio.stopListening();
 }
@@ -23,5 +25,6 @@ void loop()
 {
   sample = !sample;
   radio.write(&sample, sizeof(sample));
+  Serial.write("I transmitted stuff!\n");
   delay(1);
 }

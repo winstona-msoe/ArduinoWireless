@@ -90,7 +90,7 @@ int main(void) {
 			} while (transmissionStatus == TM_NRF24L01_Transmit_Status_Sending);
 			
 			/* Send done */
-	//		TM_DISCO_LedOff(LED_GREEN);
+			//TM_DISCO_LedOff(LED_GREEN);
 			
 			/* Go back to RX mode */
 			TM_NRF24L01_PowerUpRx();		
