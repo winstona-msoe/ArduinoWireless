@@ -17,7 +17,7 @@
 /* Include my libraries here */
 #include "defines.h"
 #include "tm_stm32f4_nrf24l01.h"
-#include "tm_stm32f4_disco.h"
+// #include "tm_stm32f4_disco.h"
 #include "tm_stm32f4_delay.h"
 #include "tm_stm32f4_usart.h"
 #include "tm_stm32f4_exti.h"
@@ -57,7 +57,7 @@ int main(void) {
 	TM_DELAY_Init();
 	
 	/* Initialize onboard leds and button */
-	TM_DISCO_LedInit();
+//	TM_DISCO_LedInit();
 	
 	/* Initialize USART, TX: PB6, RX: PB7 */
 	TM_USART_Init(USART2, TM_USART_PinsPack_1, 115200);
@@ -97,7 +97,7 @@ void TM_EXTI_Handler(uint16_t GPIO_Pin) {
 			TM_NRF24L01_GetData(dataIn);
 			
 			/* Start send */
-			TM_DISCO_LedOn(LED_GREEN);
+//			TM_DISCO_LedOn(LED_GREEN);
 			
 			/* Send it back, automatically goes to TX mode */
 			TM_NRF24L01_Transmit(dataIn);
@@ -109,7 +109,7 @@ void TM_EXTI_Handler(uint16_t GPIO_Pin) {
 			} while (transmissionStatus == TM_NRF24L01_Transmit_Status_Sending);
 			
 			/* Send done */
-			TM_DISCO_LedOff(LED_GREEN);
+//			TM_DISCO_LedOff(LED_GREEN);
 			
 			/* Go back to RX mode */
 			TM_NRF24L01_PowerUpRx();		
