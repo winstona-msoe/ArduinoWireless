@@ -21,24 +21,6 @@
 #include "tm_stm32f4_usart.h"
 #include <stdio.h>
 
-#include "tm_stm32f4_nrf24l01.h"
-
-/* SPI chip enable pin */
-#ifndef NRF24L01_CSN_PIN
-#define NRF24L01_CSN_PORT			GPIOA	//GPIOD
-#define NRF24L01_CSN_PIN			GPIO_PIN_12	//GPIO_PIN_7
-#endif
-
-/* Chip enable for transmitting */
-#ifndef NRF24L01_CE_PIN
-#define NRF24L01_CE_PORT			GPIOA //GPIOD
-#define NRF24L01_CE_PIN				GPIO_PIN_11 //GPIO_PIN_8
-#endif
-
-/* Pins configuration */
-#define NRF24L01_CE_LOW				TM_GPIO_SetPinLow(NRF24L01_CE_PORT, NRF24L01_CE_PIN)
-#define NRF24L01_CE_HIGH			TM_GPIO_SetPinHigh(NRF24L01_CE_PORT, NRF24L01_CE_PIN)
-
 /* My address */
 uint8_t MyAddress[] = {
 	0xE7,
@@ -88,24 +70,6 @@ int main(void) {
 	/* Set TX address, 5 bytes */
 	TM_NRF24L01_SetTxAddress(TxAddress);
 	
-//	while (1) {
-//		/* Chip enable put to low, disable it */
-//		NRF24L01_CE_LOW;
-//		
-//		/* Go to power up tx mode */
-//		//TM_NRF24L01_PowerUpTx();
-//		
-//		/* Send payload to nRF24L01+ */
-//		NRF24L01_CSN_LOW;
-//		/* Send write payload command */
-//		TM_SPI_Send(NRF24L01_SPI, 0x55);
-//		/* Disable SPI */
-//		NRF24L01_CSN_HIGH;
-//		
-//		/* Send data! */
-//		NRF24L01_CE_HIGH;
-//	}
-	
 	/* Reset counter */
 	TM_DELAY_SetTime(2001);
 	
@@ -128,12 +92,10 @@ int main(void) {
 			/* Turn on led to indicate sending */
 			//TM_DISCO_LedOn(LED_GREEN);
 			
-			uint8_t reg;
 			/* Wait for data to be sent */
 			do {
 				/* Get transmission status */
 				transmissionStatus = TM_NRF24L01_GetTransmissionStatus();
-				reg = TM_NRF24L01_ReadRegister(0x00);
 			} while (transmissionStatus == TM_NRF24L01_Transmit_Status_Sending);
 			
 			/* Turn off led */
