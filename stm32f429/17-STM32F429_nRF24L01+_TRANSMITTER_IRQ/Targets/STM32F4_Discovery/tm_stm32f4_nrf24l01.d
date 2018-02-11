@@ -32,3 +32,5 @@
 .\targets\stm32f4_discovery\tm_stm32f4_nrf24l01.o: ..\00-STM32F429_LIBRARIES\tm_stm32f4_spi.h
 .\targets\stm32f4_discovery\tm_stm32f4_nrf24l01.o: ..\00-STM32F429_LIBRARIES\attributes.h
 .\targets\stm32f4_discovery\tm_stm32f4_nrf24l01.o: ..\00-STM32F429_LIBRARIES\tm_stm32f4_gpio.h
+.\targets\stm32f4_discovery\tm_stm32f4_nrf24l01.o: ..\00-STM32F429_LIBRARIES\tm_stm32f4_delay.h
+.\targets\stm32f4_discovery\tm_stm32f4_nrf24l01.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
